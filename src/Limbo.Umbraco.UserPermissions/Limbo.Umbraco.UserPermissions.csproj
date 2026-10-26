@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Company>Limbo</Company>
     <Authors>Nikolaj Brask-Nielsen</Authors>
-    <Copyright>Copyright © 2022</Copyright>
+    <Copyright>Copyright © 2026</Copyright>
     <Title>Limbo User Permissions</Title>
     <Description>A package for limiting user access to content and media in Umbraco.</Description>
   </PropertyGroup>
