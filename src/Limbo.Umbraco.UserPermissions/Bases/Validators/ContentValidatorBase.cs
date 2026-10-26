@@ -1,7 +1,8 @@
-﻿using Limbo.Umbraco.UserPermissions.Rules.Bases.Models;
-using Limbo.Umbraco.UserPermissions.UserActions.Models;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Limbo.Umbraco.UserPermissions.Rules.Bases.Models;
+using Limbo.Umbraco.UserPermissions.UserActions.Models;
 using Umbraco.Core.Events;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
@@ -128,7 +129,15 @@ namespace Limbo.Umbraco.UserPermissions.Bases.Validators {
         }
 
         protected static bool IsUserInUserGroups(IUser user, ContentAccessRuleBase rule) {
-            return rule.UserGroups.Any(group => user.Groups.Any(userGroup => userGroup.Alias == group.Alias));
+            if (user?.Groups == null || rule?.UserGroups == null) {
+                return false;
+            }
+
+            return rule.UserGroups.Any(group =>
+                group?.Alias != null && user.Groups.Any(userGroup =>
+                    string.Equals(userGroup?.Alias, group.Alias, StringComparison.OrdinalIgnoreCase)
+                )
+            );
         }
     }
 }
